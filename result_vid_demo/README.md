@@ -14,3 +14,7 @@ How to flash image to my microSD
 sudo dd if=tmp/deploy/images/raspberrypi5/core-image-base-raspberrypi5.wic.bz2 of=/dev/sdX bs=4M status=progress && sync
 sync
 ```
+Run minicom 
+```bash
+sudo minicom -D /dev/ttyUSB0 -b 115200
+```
