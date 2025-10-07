@@ -11,7 +11,9 @@ sync
 
 How to flash image to my microSD
 ```bash
-sudo dd if=tmp/deploy/images/raspberrypi5/core-image-base-raspberrypi5.wic.bz2 of=/dev/sdX bs=4M status=progress && sync
+cd ~/YOCTO/poky/build/tmp/deploy/images/raspberrypi5
+bunzip2 core-image-base-raspberrypi5.wic.bz2
+sudo dd if=core-image-base-raspberrypi5.wic of=/dev/mmcblk0 bs=4M status=progress conv=fsync
 sync
 ```
 Run minicom 
