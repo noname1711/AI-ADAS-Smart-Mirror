@@ -7,8 +7,8 @@ sudo dd if=/dev/zero of=/dev/mmcblk0 bs=1M count=50 status=progress && sync
 
 How to flash image to my microSD
 ```bash
-cd ~/YOCTO/poky/build/tmp/deploy/images/raspberrypi5
-sudo dd if=core-image-base-raspberrypi5-20251007083117.rootfs.wic of=/dev/mmcblk0 bs=4M status=progress conv=fsync
+sudo dd if=~/YOCTO/poky/build/tmp/deploy/images/raspberrypi5/core-image-sato-raspberrypi5.wic \
+of=/dev/mmcblk0 bs=4M status=progress conv=fsync
 sync
 ```
 Run minicom 
