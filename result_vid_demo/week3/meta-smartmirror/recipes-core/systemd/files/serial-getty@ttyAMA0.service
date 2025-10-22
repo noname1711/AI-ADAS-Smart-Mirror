@@ -1,0 +1,5 @@
+[Service]
+ExecStart=
+ExecStart=-/sbin/agetty --autologin root - 115200,38400,9600 ttyAMA0
+Type=idle
+Restart=always

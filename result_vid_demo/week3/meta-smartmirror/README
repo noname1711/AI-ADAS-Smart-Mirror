@@ -1,0 +1,12 @@
+meta-smartmirror
+================
+
+Yocto layer for Raspberry Pi 5 Smart Mirror with dual camera support
+
+Features:
+- Dual camera management (RPi Camera v3 + OV3660 USB)
+- Low latency display (<200ms)
+- Auto-login on boot
+- Fan control for maximum cooling
+- Touch screen support
+- Optimized for real-time video processing

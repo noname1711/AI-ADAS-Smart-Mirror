@@ -1,0 +1,5 @@
+# Feature: Enable camera subsystem for SmartMirror
+define KFEATURE_DESCRIPTION "Enable media and camera drivers (IMX708, OV3660, UVC)"
+define KFEATURE_COMPATIBILITY all
+
+include camera-enable.cfg
