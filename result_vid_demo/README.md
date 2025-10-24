@@ -1,3 +1,11 @@
+Quy trình tích hợp device 
+1. Xác định giao thức sử dụng 
+2. driver tương ứng với camera? 
+3. device tree có support cho cam chưa? 
+4. build và thêm device tree thì làm sao để check xem driver đã thêm thành công vào kernel và đã chạy?  
+5. Nếu đã chạy được thì trên userspace đâu là file đại diện <Everything in Linux is File>
+
+
 How to remove all data in my microSD
 ```bash
 sudo umount /dev/mmcblk0p1 2>/dev/null
