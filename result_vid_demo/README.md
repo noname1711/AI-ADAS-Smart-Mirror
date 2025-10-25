@@ -1,5 +1,5 @@
 Quy trình tích hợp device 
-1. Xác định giao thức sử dụng 
+1. Xác định giao thức sử dụng (RPI camera module 3 - I2C-controlled, OV3660 Camera Module - USB)
 2. driver tương ứng với camera? 
 3. device tree có support cho cam chưa? 
 4. build và thêm device tree thì làm sao để check xem driver đã thêm thành công vào kernel và đã chạy?  
