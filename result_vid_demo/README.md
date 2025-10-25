@@ -109,6 +109,105 @@ CONFIG_VIDEO_BCM2835_UNICAM=m
 CONFIG_USB_CONFIGFS_F_UVC=y
 ```
 Kết quả đã ổn, bây giờ, nhiệm vụ là cần check xem device tree đã có support chưa
+```bash
+ls arch/arm/boot/dts/overlays/
+```
+Quan sát thấy có overlay có sẵn
+```bash
+arch/arm/boot/dts/overlays/imx708-overlay.dts
+arch/arm/boot/dts/overlays/imx708.dtsi
+```
+Còn OV3660 USB OVC camera là loại camera USB không cần overlay riêng. Tiến hành kiểm tra xem device tree có support cho cam chưa
+```bash
+grep -A 30 -B 5 imx708 arch/arm/boot/dts/overlays/imx708-overlay.dts
+```
+Thu được kết quả rất khả quan 
+```dts
+__overlay__ {
+			#address-cells = <1>;
+			#size-cells = <0>;
+			status = "okay";
+
+			#include "imx708.dtsi"
+		};
+	};
+
+	csi_frag: fragment@101 {
+		target = <&csi1>;
+		csi: __overlay__ {
+			status = "okay";
+			brcm,media-controller;
+
+			port {
+				csi_ep: endpoint {
+					remote-endpoint = <&cam_endpoint>;
+					clock-lanes = <0>;
+					data-lanes = <1 2>;
+					clock-noncontinuous;
+				};
+			};
+		};
+	};
+
+	__overrides__ {
+		rotation = <&cam_node>,"rotation:0";
+		orientation = <&cam_node>,"orientation:0";
+		media-controller = <&csi>,"brcm,media-controller?";
+		cam0 = <&i2c_frag>, "target:0=",<&i2c_csi_dsi0>,
+		       <&csi_frag>, "target:0=",<&csi0>,
+		       <&clk_frag>, "target:0=",<&cam0_clk>,
+		       <&reg_frag>, "target:0=",<&cam0_reg>,
+		       <&cam_node>, "clocks:0=",<&cam0_clk>,
+		       <&cam_node>, "vana1-supply:0=",<&cam0_reg>,
+```
+Điều này nghĩa là trong config.txt thêm dòng
+```bash
+dtoverlay=imx708,cam1
+```
+là Pi sẽ enable full pipeline: I²C + CSI + driver + Unicam. Cẩn thận hơn có thể check sensor node IMX708 cụ thể
+```bash
+grep -A 40 imx708 arch/arm/boot/dts/overlays/imx708.dtsi
+```
+Và kết quả
+```bash
+cam_node: imx708@1a {
+	compatible = "sony,imx708";
+	reg = <0x1a>;
+	status = "disabled";
+
+	clocks = <&cam1_clk>;
+	clock-names = "inclk";
+
+	vana1-supply = <&cam1_reg>;	/* 2.8v */
+	vana2-supply = <&cam_dummy_reg>;/* 1.8v */
+	vdig-supply = <&cam_dummy_reg>;	/* 1.1v */
+	vddl-supply = <&cam_dummy_reg>;	/* 1.8v */
+
+	rotation = <180>;
+	orientation = <2>;
+
+	port {
+		cam_endpoint: endpoint {
+			clock-lanes = <0>;
+			data-lanes = <1 2>;
+			clock-noncontinuous;
+			link-frequencies =
+				/bits/ 64 <450000000>;
+		};
+	};
+};
+
+vcm_node: dw9817@c {
+	compatible = "dongwoon,dw9817-vcm";
+	reg = <0x0c>;
+	status = "disabled";
+	VDD-supply = <&cam1_reg>;
+};
+```
+Tiến hành build sato 
+```bash
+bitbake core-image-sato
+```
 
 
 How to remove all data in my microSD
