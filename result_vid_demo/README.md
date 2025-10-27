@@ -35,7 +35,13 @@ Thu được
 ```text
 PREFERRED_VERSION_linux-raspberrypi="6.6.%"
 ```
--> Yocto chọn kernel linux-raspberrypi_6.6.bb làm nguồn chính cho board RPi5
+Check kĩ hơn 
+```bash
+ls tmp/work/raspberrypi5*/linux-raspberrypi*/ | grep 6.6
+```
+-> 6.6.63+git
+
+-> Yocto chọn kernel 6.6.63 làm nguồn chính cho board RPi5
 Thư mục source kernel thu được bằng lệnh 
 ```bash
 find meta-raspberrypi -type f -name "linux-raspberrypi*.bb*"
