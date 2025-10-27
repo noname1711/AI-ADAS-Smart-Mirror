@@ -208,6 +208,18 @@ Tiến hành build sato
 ```bash
 bitbake core-image-sato
 ```
+Check xem kernel Yocto đã thực sự build thành công 2 module cần cho full camera pipeline chưa
+```bash
+find tmp/work/raspberrypi5*/linux-raspberrypi*/ -type f -name "*imx708*.ko"
+find tmp/work/raspberrypi5*/linux-raspberrypi*/ -type f -name "*unicam*.ko"
+```
+thu được 
+```bash
+tmp/work/raspberrypi5-poky-linux/linux-raspberrypi/6.6.63+git/linux-raspberrypi5-standard-build/drivers/media/i2c/imx708.ko
+tmp/work/raspberrypi5-poky-linux/linux-raspberrypi/6.6.63+git/linux-raspberrypi5-standard-build/drivers/media/platform/bcm2835/bcm2835-unicam.ko
+```
+Đồng nghĩa với việc kernel Yocto đã build được thành công
+
 
 
 How to remove all data in my microSD
