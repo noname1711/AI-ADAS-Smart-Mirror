@@ -225,7 +225,11 @@ tmp/work/raspberrypi5-poky-linux/linux-raspberrypi/6.6.63+git/linux-raspberrypi5
 tmp/work/raspberrypi5-poky-linux/linux-raspberrypi/6.6.63+git/linux-raspberrypi5-standard-build/drivers/media/platform/bcm2835/bcm2835-unicam.ko
 ```
 Đồng nghĩa với việc kernel Yocto đã build được thành công
-
+Trên RPI:
+```bash
+root@raspberrypi5:~# uname -r                                                   
+6.6.63-v8-16k
+```
 
 
 How to remove all data in my microSD
