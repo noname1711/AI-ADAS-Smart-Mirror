@@ -230,6 +230,21 @@ Trên RPI:
 root@raspberrypi5:~# uname -r                                                   
 6.6.63-v8-16k
 ```
+Cop file .ko 
+```bash
+sudo mkdir -p /media/hungle/root/lib/modules/6.6.63-v8-16k/kernel/drivers/media/i2c
+sudo mkdir -p /media/hungle/root/lib/modules/6.6.63-v8-16k/kernel/drivers/media/platform/bcm2835
+```
+Trong build Yocto
+```bash
+sudo cp \
+tmp/work/raspberrypi5-poky-linux/linux-raspberrypi/6.6.63+git/linux-raspberrypi5-standard-build/drivers/media/i2c/imx708.ko \
+/media/hungle/root/lib/modules/6.6.63-v8-16k/kernel/drivers/media/i2c/
+
+sudo cp \
+tmp/work/raspberrypi5-poky-linux/linux-raspberrypi/6.6.63+git/linux-raspberrypi5-standard-build/drivers/media/platform/bcm2835/bcm2835-unicam.ko \
+/media/hungle/root/lib/modules/6.6.63-v8-16k/kernel/drivers/media/platform/bcm2835/
+```
 
 
 How to remove all data in my microSD
