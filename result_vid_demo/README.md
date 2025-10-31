@@ -264,3 +264,57 @@ Run minicom
 ```bash
 sudo minicom -D /dev/ttyUSB0 -b 115200
 ```
+
+Nếu bị lỗi khi flash image thành root1 
+```bash
+lsblk
+NAME        MAJ:MIN RM   SIZE RO TYPE MOUNTPOINTS
+loop0         7:0    0   1.3G  1 loop /snap/android-studio/191
+loop1         7:1    0  63.8M  1 loop /snap/core20/2599
+loop2         7:2    0 164.8M  1 loop /snap/gnome-3-28-1804/198
+loop3         7:3    0   1.2G  1 loop /snap/intellij-idea-community/661
+loop4         7:4    0    41M  1 loop /snap/node/10653
+loop5         7:5    0 905.9M  1 loop /snap/pycharm-community/480
+mmcblk0     179:0    0  59.5G  0 disk 
+├─mmcblk0p1 179:1    0   130M  0 part /media/hungle/boot
+└─mmcblk0p2 179:2    0   1.5G  0 part /media/hungle/root1
+nvme0n1     259:0    0 931.5G  0 disk 
+├─nvme0n1p1 259:1    0  70.9G  0 part /boot/efi
+├─nvme0n1p2 259:2    0    16M  0 part 
+├─nvme0n1p3 259:3    0 280.5G  0 part 
+├─nvme0n1p4 259:4    0  46.6G  0 part /
+└─nvme0n1p5 259:5    0 533.6G  0 part /home
+```
+Thì sửa như sau:
+```bash
+sudo umount /dev/mmcblk0p1 /dev/mmcblk0p2
+sudo rm -rf /media/hungle/boot /media/hungle/root /media/hungle/root1
+```
+Check lại thành 
+```bash
+sudo blkid /dev/mmcblk0p2
+```
+Thành thế này là được 
+```bash
+/dev/mmcblk0p2: LABEL="root" UUID="92723ebe-78ae-4ce5-9f65-de475212e17a" BLOCK_SIZE="4096" TYPE="ext4" PARTUUID="076c4a2a-02"
+```
+Và 
+```bash
+lsblk
+NAME        MAJ:MIN RM   SIZE RO TYPE MOUNTPOINTS
+loop0         7:0    0   1.3G  1 loop /snap/android-studio/191
+loop1         7:1    0  63.8M  1 loop /snap/core20/2599
+loop2         7:2    0 164.8M  1 loop /snap/gnome-3-28-1804/198
+loop3         7:3    0   1.2G  1 loop /snap/intellij-idea-community/661
+loop4         7:4    0    41M  1 loop /snap/node/10653
+loop5         7:5    0 905.9M  1 loop /snap/pycharm-community/480
+mmcblk0     179:0    0  59.5G  0 disk 
+├─mmcblk0p1 179:1    0   130M  0 part /media/hungle/boot
+└─mmcblk0p2 179:2    0   1.5G  0 part /media/hungle/root
+nvme0n1     259:0    0 931.5G  0 disk 
+├─nvme0n1p1 259:1    0  70.9G  0 part /boot/efi
+├─nvme0n1p2 259:2    0    16M  0 part 
+├─nvme0n1p3 259:3    0 280.5G  0 part 
+├─nvme0n1p4 259:4    0  46.6G  0 part /
+└─nvme0n1p5 259:5    0 533.6G  0 part /home
+```
