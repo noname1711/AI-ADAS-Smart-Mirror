@@ -318,3 +318,7 @@ nvme0n1     259:0    0 931.5G  0 disk
 ├─nvme0n1p4 259:4    0  46.6G  0 part /
 └─nvme0n1p5 259:5    0 533.6G  0 part /home
 ```
+Sử dụng dtc để chuyển dtbo ra dts mà check node 
+```bash
+hungle@hungle-HP-ENVY-x360-Convertible-15m-es1xxx:/media/hungle/boot/overlays$ dtc -I dtb -O dts -o imx708_rev.dts imx708.dtbo
+```
