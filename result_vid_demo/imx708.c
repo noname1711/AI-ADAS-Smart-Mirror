@@ -1973,7 +1973,8 @@ error_out:
 }
 
 static int imx708_probe(struct i2c_client *client)
-{
+{	
+	dev_info(&client->dev, ">>> [DEBUG] imx708_probe() entered\n");
 	struct device *dev = &client->dev;
 	struct imx708 *imx708;
 	int ret;
