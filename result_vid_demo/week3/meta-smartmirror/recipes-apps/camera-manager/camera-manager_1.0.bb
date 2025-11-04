@@ -5,29 +5,33 @@ LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/MIT;md5=0835ade698e0bcf8506ecda
 
 SRC_URI = " \
     file://camera-manager.cpp \
-    file://CMakeLists.txt \
     file://camera-manager.service \
+    file://camera-manager.desktop \
 "
 
 S = "${WORKDIR}"
 
-inherit cmake systemd pkgconfig
+DEPENDS = "opencv"
 
-DEPENDS += "opencv"
-
-EXTRA_OECMAKE += " \
-    -DOpenCV_DIR=${STAGING_DIR_TARGET}/usr/lib/cmake/opencv4 \
-    -DCMAKE_PREFIX_PATH=${STAGING_DIR_TARGET}/usr/lib/cmake/opencv4 \
-"
-
-SYSTEMD_SERVICE:${PN} = "camera-manager.service"
+do_compile() {
+    ${CXX} ${CXXFLAGS} -I${STAGING_INCDIR}/opencv4 -lopencv_core -lopencv_highgui -lopencv_imgproc -lopencv_videoio -lopencv_imgcodecs camera-manager.cpp -o camera-manager ${LDFLAGS}
+}
 
 do_install() {
     install -d ${D}${bindir}
-    install -m 0755 ${B}/camera-manager ${D}${bindir}/camera-manager
+    install -m 0755 camera-manager ${D}${bindir}/
 
     install -d ${D}${systemd_system_unitdir}
-    install -m 0644 ${WORKDIR}/camera-manager.service ${D}${systemd_system_unitdir}/camera-manager.service
+    install -m 0644 camera-manager.service ${D}${systemd_system_unitdir}/
+    
+    install -d ${D}${sysconfdir}/xdg/autostart
+    install -m 0644 camera-manager.desktop ${D}${sysconfdir}/xdg/autostart/
 }
 
-FILES:${PN} += "${systemd_system_unitdir}/camera-manager.service"
+FILES:${PN} += " \
+    ${bindir}/camera-manager \
+    ${systemd_system_unitdir}/camera-manager.service \
+    ${sysconfdir}/xdg/autostart/camera-manager.desktop \
+"
+
+SYSTEMD_SERVICE:${PN} = "camera-manager.service"

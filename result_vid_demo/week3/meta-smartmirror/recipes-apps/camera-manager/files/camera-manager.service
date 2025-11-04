@@ -1,15 +1,16 @@
 [Unit]
-Description=Touchscreen Dual Camera Viewer
-After=graphical.target systemd-logind.service
-Wants=graphical.target
+Description=Camera Manager (SmartMirror)
+After=network.target modules-load.target
+
 
 [Service]
 Type=simple
-Environment=DISPLAY=:0
-ExecStartPre=/bin/sh -c 'sleep 3; until [ -e /dev/video0 ]; do sleep 1; done; until [ -e /dev/video1 ]; do sleep 1; done'
 ExecStart=/usr/bin/camera-manager
-Restart=always
-RestartSec=3
+Restart=on-failure
+Nice=-5
+# Use realtime scheduler if desired (requires capabilities in image)
+# ExecStartPre=/usr/bin/setcap cap_sys_nice+ep /usr/bin/camera-manager
+
 
 [Install]
-WantedBy=graphical.target
+WantedBy=multi-user.target
