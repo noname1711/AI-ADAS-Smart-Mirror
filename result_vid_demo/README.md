@@ -265,6 +265,11 @@ Run minicom
 sudo minicom -D /dev/ttyUSB0 -b 115200
 ```
 
+I2C
+```bash
+echo imx708 0x1a | sudo tee /sys/bus/i2c/devices/i2c-13/new_device
+```
+
 Nếu bị lỗi khi flash image thành root1 
 ```bash
 lsblk
