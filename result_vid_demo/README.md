@@ -331,3 +331,9 @@ dts ngược ra dtbo
 ```bash
 dtc -@ -I dts -O dtb -o imx708.dtbo imx708.dts
 ```
+
+Update driver:
+```bash
+cd tmp/work-shared/raspberrypi5/kernel-source/drivers/media/i2c/
+code imx708.c
+```
