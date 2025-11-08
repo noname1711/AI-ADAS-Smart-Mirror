@@ -325,5 +325,9 @@ nvme0n1     259:0    0 931.5G  0 disk
 ```
 Sử dụng dtc để chuyển dtbo ra dts mà check node 
 ```bash
-hungle@hungle-HP-ENVY-x360-Convertible-15m-es1xxx:/media/hungle/boot/overlays$ dtc -I dtb -O dts -o imx708_rev.dts imx708.dtbo
+/media/hungle/boot/overlays$ dtc -I dtb -O dts -o imx708_rev.dts imx708.dtbo
+```
+dts ngược ra dtbo
+```bash
+dtc -@ -I dts -O dtb -o imx708.dtbo imx708.dts
 ```
