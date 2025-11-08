@@ -337,3 +337,9 @@ Update driver:
 cd tmp/work-shared/raspberrypi5/kernel-source/drivers/media/i2c/
 code imx708.c
 ```
+and rebuild 
+```bash
+bitbake linux-raspberrypi -c compile -f
+bitbake linux-raspberrypi -c deploy
+bitbake core-image-sato
+```
