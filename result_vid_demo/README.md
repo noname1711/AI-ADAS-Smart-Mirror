@@ -13,18 +13,18 @@ NATIVELSBSTRING      = "universal"
 TARGET_SYS           = "aarch64-poky-linux"
 MACHINE              = "raspberrypi5"
 DISTRO               = "poky"
-DISTRO_VERSION       = "5.0.12"
+DISTRO_VERSION       = "5.0.13"
 TUNE_FEATURES        = "aarch64 crypto cortexa76"
 TARGET_FPU           = ""
 meta                 
 meta-poky            
-meta-yocto-bsp       = "scarthgap:fbc7beca684d81410f5ad5c146b87e4cb080c98a"
-meta-raspberrypi     = "scarthgap:aaf976a665daa7e520545908adef8a0e9410b57f"
-meta-qt6             = "6.9:9d7693a4e0cdb1592e8e479e7c8a45e264274be3"
+meta-yocto-bsp       = "scarthgap:b33a8abe77081a2bdda0d89c61736473b2f9bb8b"
+meta-raspberrypi     = "scarthgap:8767e2ff80ec3b09cd70dd22cdb18e783ab20d7b"
+meta-qt5             = "scarthgap:e197839013fa2cfd59339508303bce91fef48928"
 meta-oe              
 meta-python          
-meta-multimedia      = "scarthgap:e621da947048842109db1b4fd3917a02e0501aa2"
-meta-smartmirror     = "scarthgap:fbc7beca684d81410f5ad5c146b87e4cb080c98a"
+meta-multimedia      = "scarthgap:15e18246dd0c0585cd1515a0be8ee5e2016d1329"
+meta-smartmirror     = "scarthgap:b33a8abe77081a2bdda0d89c61736473b2f9bb8b"
 ```
 
 Check kernel version
