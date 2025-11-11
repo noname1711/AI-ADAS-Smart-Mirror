@@ -343,3 +343,12 @@ bitbake linux-raspberrypi -c compile -f
 bitbake linux-raspberrypi -c deploy
 bitbake core-image-sato
 ```
+
+
+
+New kernel source
+```bash
+cd ~/YOCTO/poky/build/tmp/work-shared/raspberrypi5/
+rm -rf kernel-source
+git clone -b rpi-6.12.y --depth=1 https://github.com/raspberrypi/linux.git kernel-source
+```
