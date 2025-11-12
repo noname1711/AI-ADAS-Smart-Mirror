@@ -352,3 +352,7 @@ cd ~/YOCTO/poky/build/tmp/work-shared/raspberrypi5/
 rm -rf kernel-source
 git clone -b rpi-6.12.y --depth=1 https://github.com/raspberrypi/linux.git kernel-source
 ```
+Source SDK
+```bash
+source ~/poky_sdk/environment-setup-cortexa76-poky-linux
+```
