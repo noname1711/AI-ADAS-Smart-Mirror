@@ -354,5 +354,5 @@ git clone -b rpi-6.12.y --depth=1 https://github.com/raspberrypi/linux.git kerne
 ```
 Source SDK
 ```bash
-source ~/poky_sdk/environment-setup-cortexa76-poky-linux
+source /opt/poky/5.2.4/environment-setup-cortexa76-poky-linux
 ```
